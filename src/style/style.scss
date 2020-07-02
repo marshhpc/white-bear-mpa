@@ -40,13 +40,13 @@ h5 {
    border-top-left-radius: 0;
    border-top-right-radius: 0;
 }
+
 .background-image {
-   background-image: url("/images/background-landing.jpg"); // need / before folder name in this path
-   background-position-x: center; // keeps image centered, does not stretch it
-   background-position-y: top; // always puts the image centered at the top
-   background-repeat: no-repeat;
-   background-color: black; // if the screen is taller than the image (such as small width screen with the form open), continue the background with flat black color so it looks like the image is just continuing
+   background-image: url("../img/background-landing.jpg");
+   background-size: cover;
+   min-height: 100vh;
 }
+
 .logo-landing {
    background-image: url("/images/logo-landing.png");
 }

@@ -1,5 +1,25 @@
 import React from "react";
+import AppTemplate from "../ui/AppTemplate";
+import { Link } from "react-router-dom";
 
 export default function ReviewEmpty() {
-  return <h1>ReviewEmpty</h1>;
+   return (
+      <AppTemplate>
+         <h4 class="d-flex justify-content-center">Out of cards</h4>
+
+         <div>
+            <Link to="review-answer" class="btn btn-link">
+               Previous card
+            </Link>
+            <div class="float-right">
+               <Link
+                  to="review-imagery"
+                  class="btn btn-outline-primary ml-4 font-weight-bold"
+               >
+                  Get more cards
+               </Link>
+            </div>
+         </div>
+      </AppTemplate>
+   );
 }
