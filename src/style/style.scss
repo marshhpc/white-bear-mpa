@@ -89,3 +89,7 @@ textarea {
    font-family: $font-family-serif;
    padding: map-get($spacers, 0);
 }
+.disabled {
+   pointer-events: fill !important;
+   cursor: not-allowed;
+}

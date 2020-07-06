@@ -33,8 +33,6 @@ export default function AllCards() {
                   <select className="form-control form-control-sm">
                      <option>Most recent</option>
                      <option>Oldest</option>
-                     <option>Hardest</option>
-                     <option>Easiest</option>
                   </select>
                </div>
             </div>

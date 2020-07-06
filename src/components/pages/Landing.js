@@ -13,7 +13,7 @@ export default function Landing() {
                      <img
                         src={landingLogo}
                         alt="White Bear logo"
-                        ClassName="float-left mr-6 logo-img-fluid"
+                        className="float-left mr-6 logo-img-fluid"
                      />
                      <h1 className="text-brand text-white mt-2 mt-sm-0 mt-lg-2 logo-text-fluid">
                         White Bear
