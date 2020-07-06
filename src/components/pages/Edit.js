@@ -1,6 +1,11 @@
 import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom";
+import saveIcon from "../../icons/save.svg";
+import memoryCards from "../../moc-data/memory-cards";
+import toDisplayDate from "date-fns/format";
+
+const memoryCard = memoryCards[0];
 
 export default function Edit() {
    return (
@@ -10,29 +15,30 @@ export default function Edit() {
             <div className="mb-2">
                <div className="card bg-primary">
                   <div className="card-body">
-                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                     Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                     natoque penatibus et magnis dis parturient montes, nascetur
-                     ridiculus mus. Donec quam felis, ultricies nec,
-                     pellentesque eu, pretium quis, sem. Nulla consequat massa
-                     quis enim.
-                     <textarea rows="11" className="d-sm-none"></textarea>
+                     <textarea
+                        rows="11"
+                        className="d-sm-none"
+                        defaultValue={memoryCard.imagery}
+                     ></textarea>
                      <textarea
                         rows="2"
                         className="d-none d-sm-block"
+                        defaultValue={memoryCard.answer}
                      ></textarea>
                   </div>
                </div>
 
                <div className="card bg-secondary">
                   <div className="card-body">
-                     A wonderful serenity has taken possession of my entire
-                     soul, like these sweet mornings of spring which I enjoy
-                     with my whole heart. I am alone
-                     <textarea rows="11" className="d-sm-none"></textarea>
+                     <textarea
+                        rows="11"
+                        className="d-sm-none"
+                        defaultValue={memoryCard.imagery}
+                     ></textarea>
                      <textarea
                         rows="2"
                         className="d-none d-sm-block"
+                        defaultValue={memoryCard.answer}
                      ></textarea>
                   </div>
                </div>
@@ -55,7 +61,7 @@ export default function Edit() {
                id="save-imagery"
             >
                <img
-                  src="/icons/save.svg"
+                  src={saveIcon}
                   width="20px"
                   style={{ marginBottom: "3px" }}
                   className="mr-2"
@@ -69,7 +75,9 @@ export default function Edit() {
                   <h6 className="text-muted">Created on:</h6>
                </div>
                <div className="col-4 ml-6 d-flex">
-                  <h6 className="">Dec. 24, 2019</h6>
+                  <h6 className="">
+                     {toDisplayDate(memoryCard.createdAt, "MMM. d, y")}
+                  </h6>
                </div>
             </div>
             <div className="row">
@@ -77,7 +85,9 @@ export default function Edit() {
                   <h6 className="text-muted">Last attempt:</h6>
                </div>
                <div className="col-4 d-flex ml-6">
-                  <h6 className="">Dec. 31, 2019</h6>
+                  <h6 className="">
+                     {toDisplayDate(memoryCard.lastAttemtAt, "MMM. d, y")}
+                  </h6>
                </div>
             </div>
             <div className="row">
@@ -85,7 +95,9 @@ export default function Edit() {
                   <h6 className="text-muted">Next attempt:</h6>
                </div>
                <div className="col-4 ml-6 d-flex">
-                  <h6 className="">Jul. 14, 2020</h6>
+                  <h6 className="">
+                     {toDisplayDate(memoryCard.nextAttemptAt, "MMM. d, y")}
+                  </h6>
                </div>
             </div>
             <div className="row">
@@ -93,7 +105,7 @@ export default function Edit() {
                   <h6 className="text-muted">Consecutives:</h6>
                </div>
                <div className="col-4 ml-6 d-flex">
-                  <h6 className="">4</h6>
+                  <h6 className="">{memoryCard.totalSuccessfulAttempts}</h6>
                </div>
             </div>
             <div className="row">
