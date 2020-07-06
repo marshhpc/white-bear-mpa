@@ -6,16 +6,18 @@ import memoryCards from "../../moc-data/memory-cards";
 import toDisplayDate from "date-fns/format";
 import classnames from "classnames";
 import { checkIsOver, Max_Card_Chars } from "../../utils/helpers";
+import { isThisSecond } from "date-fns";
 
 const memoryCard = memoryCards[0];
 
 export default class Edit extends React.Component {
    constructor(props) {
       super(props);
-      console.log("in the edit component");
       this.state = {
          answerText: memoryCard.answer,
          imageryText: memoryCard.imagery,
+         isShowDeleteChecked: false,
+         isDeleteButtonDisplayed: false,
       };
    }
 
@@ -36,6 +38,9 @@ export default class Edit extends React.Component {
 
    setAnswerText(e) {
       this.setState({ answerText: e.target.value });
+   }
+   showDeleteButton() {
+      this.setState({ isDeleteChecked: !this.state.isDeleteChecked });
    }
 
    render() {
@@ -161,6 +166,9 @@ export default class Edit extends React.Component {
                            type="checkbox"
                            className="custom-control-input"
                            id="show-delete"
+                           onClick={() => {
+                              this.showDeleteButton();
+                           }}
                         />
                         <label
                            className="custom-control-label"
@@ -171,15 +179,14 @@ export default class Edit extends React.Component {
                      </div>
                   </div>
                </div>
-
-               <Link
-                  to="/all-cards"
-                  type="button"
-                  className="d-none btn btn-lg btn-outline-danger my-4"
-                  id="delete-button"
-               >
-                  Delete this card
-               </Link>
+               {this.state.isDeleteChecked && (
+                  <button
+                     className="btn btn-lg btn-outline-danger my-4"
+                     id="delete-button"
+                  >
+                     Delete this card
+                  </button>
+               )}
             </div>
          </AppTemplate>
       );
