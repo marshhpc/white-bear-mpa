@@ -6,7 +6,6 @@ import memoryCards from "../../moc-data/memory-cards";
 import toDisplayDate from "date-fns/format";
 import classnames from "classnames";
 import { checkIsOver, Max_Card_Chars } from "../../utils/helpers";
-import { isThisSecond } from "date-fns";
 
 const memoryCard = memoryCards[0];
 
