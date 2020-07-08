@@ -2,8 +2,10 @@ import React from "react";
 import classnames from "classnames";
 import hash from "object-hash";
 import { v4 as getUuid } from "uuid";
+import { withRouter } from "react-router-dom";
+import { EMAIL_REGEX } from "../../utils/helpers";
 
-export default class LogIn extends React.Component {
+class LogIn extends React.Component {
    constructor(props) {
       super(props);
       console.log("In a new class component");
@@ -24,14 +26,12 @@ export default class LogIn extends React.Component {
 
    async setEmailState(emailInput) {
       const lowerCasedEmailInput = emailInput.toLowerCase();
-      // eslint-disable-next-line
-      const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (emailInput === "")
          this.setState({
             emailError: "Please enter your email address.",
             hasEmailError: true,
          });
-      else if (emailRegex.test(lowerCasedEmailInput) === false) {
+      else if (EMAIL_REGEX.test(lowerCasedEmailInput) === false) {
          console.log("Not A Valid Email");
          this.setState({
             emailError: "Please enter a valid email address.",
@@ -42,38 +42,10 @@ export default class LogIn extends React.Component {
       }
    }
 
-   checkHasLocalPart(passwordInput, emailInput) {
-      const localPart = emailInput.split("@")[0];
-      if (localPart === "") return false;
-      else if (localPart.length < 4) return false;
-      else return passwordInput.includes(localPart);
-   }
-
    async setPasswordState(passwordInput, emailInput) {
-      console.log(passwordInput);
-
-      const uniqChars = [...new Set(passwordInput)];
-
       if (passwordInput === "") {
          this.setState({
-            passwordError: "Please create password.",
-            hasPasswordError: true,
-         });
-      } else if (passwordInput.length < 9) {
-         this.setState({
-            passwordError: "Your password must be at least 9 characters.",
-            hasPasswordError: true,
-         });
-      } else if (this.checkHasLocalPart(passwordInput, emailInput)) {
-         this.setState({
-            passwordError:
-               "For you safety, your password cannot contain you email address.",
-            hasPasswordError: true,
-         });
-      } else if (uniqChars.length < 3) {
-         this.setState({
-            passwordError:
-               "For you safety, your password most contain at least 3 unique characters.",
+            passwordError: "Please enter your password.",
             hasPasswordError: true,
          });
       } else {
@@ -81,7 +53,7 @@ export default class LogIn extends React.Component {
       }
    }
 
-   async returningUserValidation() {
+   async validateAndLogInUser() {
       const emailInput = document.getElementById("email-input").value;
       const passwordInput = document.getElementById("password-input").value;
       await this.setEmailState(emailInput);
@@ -97,6 +69,8 @@ export default class LogIn extends React.Component {
             createdAt: Date.now(),
          };
          console.log(user);
+         // redirect the user
+         this.props.history.push("/create-answer");
       }
    }
 
@@ -147,7 +121,7 @@ export default class LogIn extends React.Component {
                      to="/create-answer"
                      className="btn btn-success btn-lg btn-landing float-right"
                      onClick={() => {
-                        this.returningUserValidation();
+                        this.validateAndLogInUser();
                      }}
                   >
                      Log in
@@ -158,3 +132,4 @@ export default class LogIn extends React.Component {
       );
    }
 }
+export default withRouter(LogIn);
