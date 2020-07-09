@@ -9,14 +9,17 @@ import actions from "../../store/actions";
 
 class ReviewAnswer extends React.Component {
    goToNextCard() {
-      // TODO: if index of current card = length of the array of all cards // if weve gone to the end of the array
-      // than show out of cards component.
-      this.props.dispatch({ type: actions.UPDATE_INDEX_OF_CURRENT_CARD });
-      this.props.history.push("/review-imagery");
+      if (this.props.queue.index === this.props.queue.cards.length - 1) {
+         this.props.dispatch({ type: actions.RESET_QUEUE });
+         this.props.history.push("/review-empty");
+      } else {
+         this.props.dispatch({ type: actions.UPDATE_INDEX_OF_CURRENT_CARD });
+         this.props.history.push("/review-imagery");
+      }
    }
 
    render() {
-      const memoryCard = this.props.queuedCards[this.props.indexOfCurrentCard];
+      const memoryCard = this.props.queue.cards[this.props.queue.index];
 
       return (
          <AppTemplate>
@@ -70,8 +73,7 @@ class ReviewAnswer extends React.Component {
 
 function mapStateToProps(state) {
    return {
-      queuedCards: state.queuedCards,
-      indexOfCurrentCard: state.indexOfCurrentCard,
+      queue: state.queue,
    };
 }
 export default connect(mapStateToProps)(ReviewAnswer);

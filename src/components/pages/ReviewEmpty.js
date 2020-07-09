@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 export default function ReviewEmpty() {
    return (
       <AppTemplate>
-         <h4 class="d-flex justify-content-center">Out of cards</h4>
+         <h4 className="d-flex justify-content-center">Out of cards</h4>
 
          <div>
-            <Link to="review-answer" class="btn btn-link">
+            <Link to="review-answer" className="btn btn-link">
                Previous card
             </Link>
-            <div class="float-right">
+            <div className="float-right">
                <Link
                   to="review-imagery"
-                  class="btn btn-outline-primary ml-4 font-weight-bold"
+                  className="btn btn-outline-primary ml-4 font-weight-bold"
                >
                   Get more cards
                </Link>
