@@ -1,25 +1,54 @@
 import React from "react";
 import AppTemplate from "../ui/AppTemplate";
-import { Link } from "react-router-dom";
 
-export default function ReviewEmpty() {
-   return (
-      <AppTemplate>
-         <h4 className="d-flex justify-content-center">Out of cards</h4>
+import { connect } from "react-redux";
+import actions from "../../store/actions";
 
-         <div>
-            <Link to="review-answer" className="btn btn-link">
-               Previous card
-            </Link>
-            <div className="float-right">
-               <Link
-                  to="review-imagery"
-                  className="btn btn-outline-primary ml-4 font-weight-bold"
-               >
-                  Get more cards
-               </Link>
+class ReviewEmpty extends React.Component {
+   goToPrevCard() {
+      this.props.dispatch({ type: actions.DECREMENT_QUEUE_INDEX });
+      this.props.history.push("/review-answer");
+   }
+
+   getMoreCards() {
+      this.props.dispatch({ type: actions.DECREMENT_QUEUE_INDEX });
+      this.props.history.push("/review-imagery");
+   }
+
+   render() {
+      return (
+         <AppTemplate>
+            <h4 className="d-flex justify-content-center">Out of cards</h4>
+
+            <div>
+               {this.props.queue.index > 0 && (
+                  <button
+                     className="btn bbutton"
+                     onClick={() => {
+                        this.goToPrevCard();
+                     }}
+                  >
+                     Previous card
+                  </button>
+               )}
+               <div className="float-right">
+                  <button
+                     className="btn btn-outline-primary ml-4 font-weight-bold"
+                     onClick={() => {
+                        this.getMoreCards();
+                     }}
+                  >
+                     Get more cards
+                  </button>
+               </div>
             </div>
-         </div>
-      </AppTemplate>
-   );
+         </AppTemplate>
+      );
+   }
 }
+function mapStateToProps(state) {
+   return {
+      queue: state.queue,
+   };
+}
+export default connect(mapStateToProps)(ReviewEmpty);

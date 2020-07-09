@@ -39,6 +39,11 @@ class ReviewImagery extends React.Component {
       }
    }
 
+   goToPrevCard() {
+      this.props.dispatch({ type: actions.DECREMENT_QUEUE_INDEX });
+      this.props.history.push("/review-answer");
+   }
+
    render() {
       const memoryCard = this.props.queue.cards[this.props.queue.index];
 
@@ -52,9 +57,16 @@ class ReviewImagery extends React.Component {
                </div>
             </div>
             <div>
-               <Link to="/review-answer" className="btn btn-link">
-                  Previous card
-               </Link>
+               {this.props.queue.index > 0 && (
+                  <button
+                     className="btn bbutton"
+                     onClick={() => {
+                        this.goToPrevCard();
+                     }}
+                  >
+                     Previous card
+                  </button>
+               )}
                <div className="float-right">
                   <Link
                      to="/review-answer"
