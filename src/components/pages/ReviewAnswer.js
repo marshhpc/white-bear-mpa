@@ -8,6 +8,13 @@ import actions from "../../store/actions";
 // const memoryCard = memoryCards[0];
 
 class ReviewAnswer extends React.Component {
+   constructor(props) {
+      super(props);
+      if (this.props.queue.cards.length === 0) {
+         this.props.history.push("/review-empty");
+      }
+   }
+
    goToNextCard() {
       if (this.props.queue.index === this.props.queue.cards.length - 1) {
          // youre on the last card
@@ -17,6 +24,19 @@ class ReviewAnswer extends React.Component {
          this.props.dispatch({ type: actions.INCREMENT_QUEUE_INDEX });
          this.props.history.push("/review-imagery");
       }
+   }
+
+   storeEditablecard() {
+      console.log("Storing editable cards ");
+      const memoryCard = this.props.queue.cards[this.props.queue.index];
+      console.log("memoryCard", memoryCard);
+      this.props.dispatch({
+         type: actions.STORE_EDITABLE_CARD,
+         payload: {
+            card: memoryCard,
+            prevRoute: "/review-answer",
+         },
+      });
    }
 
    render() {
@@ -37,7 +57,13 @@ class ReviewAnswer extends React.Component {
                </div>
             </div>
             <div>
-               <Link to="/edit" className="btn btn-link">
+               <Link
+                  to="/edit"
+                  className="btn btn-link"
+                  onClick={() => {
+                     this.storeEditablecard();
+                  }}
+               >
                   Edit
                </Link>
                <div className="float-right">

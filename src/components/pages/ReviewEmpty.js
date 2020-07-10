@@ -18,7 +18,9 @@ class ReviewEmpty extends React.Component {
    render() {
       return (
          <AppTemplate>
-            <h4 className="d-flex justify-content-center">Out of cards</h4>
+            <h4 className="d-flex justify-content-center text-muted">
+               Out of cards
+            </h4>
 
             <div>
                {this.props.queue.index > 0 && (

@@ -37,6 +37,9 @@ class ReviewImagery extends React.Component {
           
          */
       }
+      if (props.queue.index > props.queue.cards.length) {
+         this.props.history.push("/review-empty");
+      }
    }
 
    goToPrevCard() {

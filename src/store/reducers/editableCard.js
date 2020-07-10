@@ -1,22 +1,13 @@
 import actions from "../actions";
 
-export default function queue(queue = {}, action) {
-   let newQueue = { ...queue };
+export default function editableCard(editableCard = {}, action) {
+   let newEditableCard = { ...editableCard };
    switch (action.type) {
-      case actions.STORE_QUEUED_CARDS:
-         newQueue.cards = action.payload;
-         return newQueue; // new state
-      case actions.INCREMENT_QUEUE_INDEX:
-         newQueue.index += 1;
-         return newQueue;
-      case actions.DECREMENT_QUEUE_INDEX:
-         newQueue.index -= 1;
-         return newQueue;
-      case actions.RESET_QUEUE:
-         newQueue.cards = [];
-         newQueue.index = 0;
-         return newQueue;
+      case actions.STORE_EDITABLE_CARD:
+         newEditableCard.card = action.payload.card;
+         newEditableCard.prevRoute = action.payload.prevRoute;
+         return newEditableCard; // new state
       default:
-         return queue;
+         return editableCard;
    }
 }
