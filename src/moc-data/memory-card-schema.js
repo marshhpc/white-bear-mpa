@@ -2,7 +2,7 @@ const memoryCardSchema = {
    id: String,
    imagery: String,
    answer: String,
-   useerId: String,
+   userId: String,
    createdAt: Number,
    nextAttemptAt: Number,
    totalSuccessfulAttempts: Number,
